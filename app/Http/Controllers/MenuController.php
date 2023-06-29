@@ -16,7 +16,10 @@ class MenuController extends Controller
 
     public function kontrol()
     {
-        return view('kontrol');
+
+        $data = Esp::all(); // Mengambil semua data dari tabel "esp"
+
+        return view('Kontrol', compact('data'));
     }
 
     public function datadetail()
