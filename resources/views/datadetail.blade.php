@@ -35,6 +35,7 @@
                                             <th>Tanggal/Hari/Jam</th>
                                             <th>Kekeruhan Air(Angka)</th>
                                             <th>pH Air(Angka)</th>
+                                            <th>Kualitas Air( Fuzzy Angka)</th>
                                             <th>Kekeruhan Air(Bahasa)</th>
                                             <th>pH Air(Bahasa)</th>
                                             <th>Pompa 1 (Filter)</th>
@@ -49,6 +50,7 @@
                                             </td>
                                             <td>{{ $item->final_ker }}</td>
                                             <td>{{ $item->final_ph }}</td>
+                                            <td>{{ $item->fuzzy }}</td>
                                             <td>{{ $item->keadaanturbity }}</td>
                                             <td>{{ $item->keadaanph }}</td>
                                             <td>{{ $item->pompa1 }}</td>

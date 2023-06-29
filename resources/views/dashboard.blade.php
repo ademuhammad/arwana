@@ -11,6 +11,7 @@
                             <span class="info-box-icon bg-info elevation-1"><i class="fas fa-tachometer-alt"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Kualitas Air :</span>
+                                <span class="info-box-number">{{ $data->first()->fuzzy }}</span>
                                 <span class="info-box-text"> Normal</span>
                             </div>
                             <!-- /.info-box-content -->
@@ -49,8 +50,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="chart">
-                                    <canvas id="areaChart"
-                                        style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                    <canvas id="areaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -64,8 +64,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="chart">
-                                    <canvas id="areaChart2"
-                                        style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                    <canvas id="areaChart2" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                                 </div>
                             </div>
                             <!-- /.card-body -->
