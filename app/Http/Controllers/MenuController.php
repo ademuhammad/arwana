@@ -35,6 +35,7 @@ class MenuController extends Controller
 
     public function home()
     {
-        return view('dashboard');
+        $data = Esp::all();
+        return view('dashboard', compact('data'));
     }
 }
