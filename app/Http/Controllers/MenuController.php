@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Esp;
-
+use App\Models\Pompa;
 
 class MenuController extends Controller
 {
@@ -17,9 +17,8 @@ class MenuController extends Controller
     public function kontrol()
     {
 
-        $data = Esp::all(); // Mengambil semua data dari tabel "esp"
-
-        return view('Kontrol', compact('data'));
+        $kontrol = Pompa::all();
+        return view('Kontrol', compact('kontrol'));
     }
 
     public function datadetail()

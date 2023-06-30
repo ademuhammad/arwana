@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EspController;
+use App\Http\Controllers\PompaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/esp', [EspController::class, 'store'])->name('data.store');
+Route::post('/kontrol', [PompaController::class, 'controlpompa'])->name('kontrol.controlpompa');
