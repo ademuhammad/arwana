@@ -102,6 +102,7 @@
                                             <td>{{ $item->keadaanph }}</td>
                                         </tr>
                                         @endforeach
+                                        {{ $data->links() }}
                                     </tbody>
                                 </table>
                             </div>

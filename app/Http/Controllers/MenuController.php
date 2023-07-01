@@ -35,7 +35,8 @@ class MenuController extends Controller
 
     public function dashboard()
     {
-        $data = Esp::all(); // Mengambil semua data dari tabel "esp"
+        date_default_timezone_set('Asia/Jakarta'); // Set zona waktu menjadi Asia/Jakarta
+        $data = Esp::orderBy('created_at', 'desc')->paginate(10);
 
         return view('dashboard', compact('data'));
     }
