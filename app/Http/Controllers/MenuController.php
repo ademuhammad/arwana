@@ -11,14 +11,20 @@ class MenuController extends Controller
 
     public function data()
     {
-        return view('data');
+        date_default_timezone_set('Asia/Jakarta'); // Set zona waktu menjadi Asia/Jakarta
+        $data = Esp::orderBy('created_at', 'desc')->paginate(10); // Mengambil 10 data per halaman dari tabel "esp"
+        $pompa = Pompa::first(); // Mengambil catatan pertama dari model Pompa
+
+        return view('data', compact('data', 'pompa'));
     }
 
     public function kontrol()
     {
+        date_default_timezone_set('Asia/Jakarta'); // Set zona waktu menjadi Asia/Jakarta
+        $data = Esp::orderBy('created_at', 'desc')->paginate(10); // Mengambil 10 data per halaman dari tabel "esp"
         $pompa = Pompa::first(); // Mengambil catatan pertama dari model Pompa
 
-        return view('Kontrol', compact('pompa'));
+        return view('Kontrol', compact('pompa', 'data'));
     }
 
 

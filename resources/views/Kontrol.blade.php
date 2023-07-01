@@ -7,27 +7,52 @@
             <div class="container">
                 <div class="card">
                     <div class="card-body">
-                        <h5>Data Saat ini</h5>
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Tanggal/Hari/Jam</th>
-                                    <th>Kekeruhan Air (Angka)</th>
-                                    <th>pH Air (Angka)</th>
-                                    <th>Kekeruhan Air (Bahasa)</th>
-                                    <th>pH Air (Bahasa)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Minggu/13-01-2023/13:13</td>
-                                    <td>27</td>
-                                    <td>6</td>
-                                    <td>Sedang Keruh</td>
-                                    <td>Normal</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <h5 class="text-center">Data Saat ini</h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-info elevation-1"><i
+                                            class="fas fa-tachometer-alt"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Kualitas Air :</span>
+                                        <span class="info-box-number">{{ $data->first()->fuzzy }}</span>
+                                        <span class="info-box-text"> {{ $data->first()->kualitasair }}</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <div class="col-md-4">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-info elevation-1"><i
+                                            class="fas fa-tachometer-alt"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Keadaan pH air :</span>
+                                        <span class="info-box-number">{{ $data->first()->final_ph }}</span>
+                                        <span class="info-box-text"> {{ $data->first()->keadaanph }}</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <div class="col-md-4">
+                                <div class="info-box mb-3">
+                                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-tint"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Keadaan Kekeruhan:</span>
+                                        <span class="info-box-number">{{ $data->first()->final_ker }}</span>
+                                        <span class="info-box-text">{{ $data->first()->keadaanturbity }}</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+
+                        </div>
+
+
+
+
                     </div>
                 </div>
 

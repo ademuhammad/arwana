@@ -5,23 +5,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <!-- Informasi Kualitas Air -->
-                    </div>
-                    <div class="col-md-4">
-                        <!-- Informasi Keadaan pH Air -->
-                    </div>
-                    <div class="col-md-4">
-                        <!-- Informasi Keadaan Kekeruhan -->
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-md-3">
-                        <!-- Grafik Tingkat Kekeruhan -->
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-md-3">
-                        <!-- Grafik Tingkat pH -->
-                    </div>
-                </div>
+
                 <div class="row">
                     <div class="col">
                         <div class="card">
@@ -58,9 +42,23 @@
                                             <td>{{ $item->pompa3 }}</td>
                                         </tr>
                                         @endforeach
-                                        {{ $data->links() }}
                                     </tbody>
                                 </table>
+                                <nav aria-label="...">
+                                    <ul class="pagination">
+                                        <li class="page-item {{ $data->previousPageUrl() ? '' : 'disabled' }}">
+                                            <a class="page-link" href="{{ $data->previousPageUrl() }}">Previous</a>
+                                        </li>
+                                        @foreach ($data->getUrlRange(1, $data->lastPage()) as $page => $url)
+                                        <li class="page-item {{ $page == $data->currentPage() ? 'active' : '' }}">
+                                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                        </li>
+                                        @endforeach
+                                        <li class="page-item {{ $data->nextPageUrl() ? '' : 'disabled' }}">
+                                            <a class="page-link" href="{{ $data->nextPageUrl() }}">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>

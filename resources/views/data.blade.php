@@ -148,6 +148,21 @@
                                 </tr>
                             </tfoot>
                         </table>
+                        <nav aria-label="...">
+                            <ul class="pagination">
+                                <li class="page-item {{ $data->previousPageUrl() ? '' : 'disabled' }}">
+                                    <a class="page-link" href="{{ $data->previousPageUrl() }}">Previous</a>
+                                </li>
+                                @foreach ($data->getUrlRange(1, $data->lastPage()) as $page => $url)
+                                <li class="page-item {{ $page == $data->currentPage() ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                </li>
+                                @endforeach
+                                <li class="page-item {{ $data->nextPageUrl() ? '' : 'disabled' }}">
+                                    <a class="page-link" href="{{ $data->nextPageUrl() }}">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                     <!-- /.card-body -->
                 </div>
