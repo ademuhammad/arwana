@@ -15,8 +15,8 @@
                                             class="fas fa-tachometer-alt"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">Kualitas Air :</span>
-                                        <span class="info-box-number">{{ $data->first()->fuzzy }}</span>
-                                        <span class="info-box-text"> {{ $data->first()->kualitasair }}</span>
+                                        <span class="info-box-number">{{ $data->last()->fuzzy }}</span>
+                                        <span class="info-box-text"> {{ $data->last()->kualitasair }}</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -28,8 +28,8 @@
                                             class="fas fa-tachometer-alt"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">Keadaan pH air :</span>
-                                        <span class="info-box-number">{{ $data->first()->final_ph }}</span>
-                                        <span class="info-box-text"> {{ $data->first()->keadaanph }}</span>
+                                        <span class="info-box-number">{{ $data->last()->final_ph }}</span>
+                                        <span class="info-box-text"> {{ $data->last()->keadaanph }}</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -40,8 +40,8 @@
                                     <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-tint"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">Keadaan Kekeruhan:</span>
-                                        <span class="info-box-number">{{ $data->first()->final_ker }}</span>
-                                        <span class="info-box-text">{{ $data->first()->keadaanturbity }}</span>
+                                        <span class="info-box-number">{{ $data->last()->final_ker }}</span>
+                                        <span class="info-box-text">{{ $data->last()->keadaanturbity }}</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
