@@ -8,5 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Pompa extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+
+    protected $fillable = [
+        'pompafilter',
+        'pompabuang',
+        'pompaisi',
+        'data_from_esp32',
+    ];
 }

@@ -16,17 +16,21 @@ class MenuController extends Controller
 
     public function kontrol()
     {
+        $pompa = Pompa::first(); // Mengambil catatan pertama dari model Pompa
 
-        $kontrol = Pompa::all();
-        return view('Kontrol', compact('kontrol'));
+        return view('Kontrol', compact('pompa'));
     }
+
+
 
     public function datadetail()
     {
         $data = Esp::all(); // Mengambil semua data dari tabel "esp"
+        $pompa = Pompa::first(); // Mengambil catatan pertama dari model Pompa
 
-        return view('datadetail', compact('data'));
+        return view('datadetail', compact('data', 'pompa'));
     }
+
 
     public function dashboard()
     {
