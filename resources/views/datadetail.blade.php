@@ -58,6 +58,7 @@
                                             <td>{{ $item->pompa3 }}</td>
                                         </tr>
                                         @endforeach
+                                        {{ $data->links() }}
                                     </tbody>
                                 </table>
                             </div>

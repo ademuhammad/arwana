@@ -25,7 +25,8 @@ class MenuController extends Controller
 
     public function datadetail()
     {
-        $data = Esp::all(); // Mengambil semua data dari tabel "esp"
+        date_default_timezone_set('Asia/Jakarta'); // Set zona waktu menjadi Asia/Jakarta
+        $data = Esp::orderBy('created_at', 'desc')->paginate(10); // Mengambil 10 data per halaman dari tabel "esp"
         $pompa = Pompa::first(); // Mengambil catatan pertama dari model Pompa
 
         return view('datadetail', compact('data', 'pompa'));

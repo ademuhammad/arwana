@@ -12,7 +12,7 @@
                             <div class="info-box-content">
                                 <span class="info-box-text">Kualitas Air :</span>
                                 <span class="info-box-number">{{ $data->first()->fuzzy }}</span>
-                                <span class="info-box-text"> Normal</span>
+                                <span class="info-box-text"> {{ $data->first()->kualitasair }}</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -24,7 +24,7 @@
                             <div class="info-box-content">
                                 <span class="info-box-text">Keadaan pH air :</span>
                                 <span class="info-box-number">{{ $data->first()->final_ph }}</span>
-                                <span class="info-box-text"> Normal</span>
+                                <span class="info-box-text"> {{ $data->first()->keadaanph }}</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -36,7 +36,7 @@
                             <div class="info-box-content">
                                 <span class="info-box-text">Keadaan Kekeruhan:</span>
                                 <span class="info-box-number">{{ $data->first()->final_ker }}</span>
-                                <span class="info-box-text">Sedang Keruh</span>
+                                <span class="info-box-text">{{ $data->first()->keadaanturbity }}</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -50,7 +50,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="chart">
-                                    <canvas id="areaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                    <canvas id="areaChart"
+                                        style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -64,7 +65,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="chart">
-                                    <canvas id="areaChart2" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                    <canvas id="areaChart2"
+                                        style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                                 </div>
                             </div>
                             <!-- /.card-body -->
