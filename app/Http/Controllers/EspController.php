@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Esp;
 use App\Events\NewEspEvent;
+use App\Models\Pompa;
 use Illuminate\Support\Facades\Event;
 
 
@@ -13,8 +14,6 @@ class EspController extends Controller
     public function store(Request $request)
     {
         try {
-
-
             $esp = Esp::create([
                 'final_ph' => $request->final_ph,
                 'final_ker' => $request->final_ker,
@@ -24,12 +23,13 @@ class EspController extends Controller
                 'kualitasair' => $request->kualitasair,
             ]);
 
+            $pompa = Pompa::first()->only('pompafilter', 'pompaisi', 'pompabuang');
+
             Event::dispatch(new NewEspEvent($esp));
 
-            return response()->json([
-                'code' => 200,
-                'esp' => $esp,
-            ]);
+            return response()->json(
+                $pompa
+            );
         } catch (\Exception $e) {
             return response()->json([
                 'code' => 400,
