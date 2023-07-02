@@ -38,115 +38,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Minggu/13-01-2023/13:13</td>
-                                    <td>27
-                                    </td>
-                                    <td>6</td>
-                                    <td> Sedang Keruh</td>
-                                    <td>Normal</td>
-                                </tr>
-                                <tr>
-                                    <td>Minggu/13-01-2023/13:14</td>
-                                    <td>27
-                                    </td>
-                                    <td>6</td>
-                                    <td> Sedang Keruh</td>
-                                    <td>Normal</td>
-                                </tr>
-                                <tr>
-                                    <td>Minggu/13-01-2023/13:15</td>
-                                    <td>27
-                                    </td>
-                                    <td>6</td>
-                                    <td> Sedang Keruh</td>
-                                    <td>Normal</td>
-                                </tr>
-                                <tr>
-                                    <td>Minggu/13-01-2023/13:16</td>
-                                    <td>27
-                                    </td>
-                                    <td>6</td>
-                                    <td> Sedang Keruh</td>
-                                    <td>Normal</td>
-                                </tr>
-                                <tr>
-                                    <td>Minggu/13-01-2023/13:17</td>
-                                    <td>27
-                                    </td>
-                                    <td>6</td>
-                                    <td> Sedang Keruh</td>
-                                    <td>Normal</td>
-                                </tr>
-                                <tr>
-                                    <td>Minggu/13-01-2023/13:18</td>
-                                    <td>27
-                                    </td>
-                                    <td>6</td>
-                                    <td> Sedang Keruh</td>
-                                    <td>Normal</td>
-                                </tr>
-                                <tr>
-                                    <td>Minggu/13-01-2023/13:19</td>
-                                    <td>27
-                                    </td>
-                                    <td>6</td>
-                                    <td> Sedang Keruh</td>
-                                    <td>Normal</td>
-                                </tr>
-                                <tr>
-                                    <td>Minggu/13-01-2023/13:20</td>
-                                    <td>27
-                                    </td>
-                                    <td>6</td>
-                                    <td> Sedang Keruh</td>
-                                    <td>Normal</td>
-                                </tr>
-                                <tr>
-                                    <td>Minggu/13-01-2023/13:21</td>
-                                    <td>27
-                                    </td>
-                                    <td>6</td>
-                                    <td> Sedang Keruh</td>
-                                    <td>Normal</td>
-                                </tr>
-                                <tr>
-                                    <td>Minggu/13-01-2023/13:22</td>
-                                    <td>27
-                                    </td>
-                                    <td>6</td>
-                                    <td> Sedang Keruh</td>
-                                    <td>Normal</td>
-                                </tr>
 
-                                <tr>
-                                    <td>Senin/14-01-2023/13:13</td>
-                                    <td>27
-                                    </td>
-                                    <td>6</td>
-                                    <td> Sedang Keruh</td>
-                                    <td>Normal</td>
-                                </tr>
 
+
+                                @foreach ($data as $item)
                                 <tr>
-                                    <td>Senin/14-01-2023/13:15</td>
-                                    <td>27
+                                    <td>{{ $item->created_at ? $item->created_at->format('l/d-m-Y/H:i') : '' }}
                                     </td>
-                                    <td>6</td>
-                                    <td> Sedang Keruh</td>
-                                    <td>Normal</td>
+                                    <td>{{ $item->final_ker }}</td>
+                                    <td>{{ $item->final_ph }}</td>
+                                    <td>{{ $item->keadaanturbity }}</td>
+                                    <td>{{ $item->keadaanph }}</td>
                                 </tr>
+                                @endforeach
 
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>NTU</th>
-                                    <th>pH</th>
-                                    <th>Fuzzy</th>
-                                    <th>Fuzzy</th>
-                                </tr>
-                            </tfoot>
+
                         </table>
                         <nav aria-label="...">
                             <ul class="pagination">
