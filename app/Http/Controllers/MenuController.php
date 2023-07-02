@@ -50,7 +50,10 @@ class MenuController extends Controller
 
     public function home()
     {
-        $data = Esp::all();
+        date_default_timezone_set('Asia/Jakarta'); // Set zona waktu menjadi Asia/Jakarta
+        $data = Esp::orderBy('created_at', 'desc')->paginate(10); // Mengambil 10 data per halaman dari tabel "esp"
+
+
         return view('dashboard', compact('data'));
     }
 }
