@@ -130,3 +130,28 @@
     </section>
 </div>
 @endsection
+
+@push('scripts')
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script>
+    const pusher = new Pusher('a153eba49121dd95339e', {
+        cluster: '3dfdb55b941f6315e793',
+        encrypted: true
+    });
+
+    const channel = pusher.subscribe('esp-channel');
+    channel.bind('new-esp', function(data) {
+        const newRow = `
+            <tr>
+                <td>${data.esp.created_at ? data.esp.created_at : ''}</td>
+                <td>${data.esp.final_ker}</td>
+                <td>${data.esp.final_ph}</td>
+                <td>${data.esp.fuzzy}</td>
+                <td>${data.esp.keadaanturbity}</td>
+                <td>${data.esp.keadaanph}</td>
+                <td>${data.esp.kualitasair}</td>
+            </tr>`;
+        $('#example1 tbody').prepend(newRow);
+    });
+</script>
+@endpush

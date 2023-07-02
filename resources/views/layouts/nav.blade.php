@@ -348,28 +348,23 @@
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
     </script>
 
-    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-    <script>
-    const pusher = new Pusher('YOUR_PUSHER_APP_KEY', {
-        cluster: 'YOUR_PUSHER_APP_CLUSTER',
-        encrypted: true
-    });
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <script src="{{ asset('/AdminLTE/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('/AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('/AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('/AdminLTE/plugins/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('/AdminLTE/plugins/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('/AdminLTE/plugins/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('/AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('/AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('/AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
-    const channel = pusher.subscribe('esp-channel');
-    channel.bind('new-esp', function(data) {
-        const newRow = `
-            <tr>
-                <td>${data.esp.created_at ? data.esp.created_at : ''}</td>
-                <td>${data.esp.final_ker}</td>
-                <td>${data.esp.final_ph}</td>
-                <td>${data.esp.fuzzy}</td>
-                <td>${data.esp.keadaanturbity}</td>
-                <td>${data.esp.keadaanph}</td>
-                <td>${data.esp.kualitasair}</td>
-            </tr>`;
-        $('#example1 tbody').prepend(newRow);
-    });
-    </script>
 
 </body>
 

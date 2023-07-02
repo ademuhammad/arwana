@@ -22,4 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('/esp', [EspController::class, 'store'])->name('data.store');
-// Route::post('/kontrol', [PompaController::class, 'controlPompa'])->name('kontrol.controlpompa');
+Route::post('/kontrol', [PompaController::class, 'controlPompa'])->name('kontrol.controlpompa');
