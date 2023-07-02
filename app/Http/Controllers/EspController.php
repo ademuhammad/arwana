@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
 use Exception;
 use App\Models\Esp;
+use App\Events\NewEspEvent;
+use Illuminate\Support\Facades\Event;
 
 class EspController extends Controller
 {
@@ -20,6 +22,8 @@ class EspController extends Controller
                 'keadaanturbity' => $request->keadaanturbity,
                 'kualitasair' => $request->kualitasair,
             ]);
+
+            Event::dispatch(new NewEspEvent($esp));
 
             return response()->json([
                 'code' => 200,
