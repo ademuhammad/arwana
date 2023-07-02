@@ -8,12 +8,15 @@ use Exception;
 use App\Models\Esp;
 use App\Events\NewEspEvent;
 use Illuminate\Support\Facades\Event;
+use \Carbon\Carbon;
 
 class EspController extends Controller
 {
     public function store(Request $request)
     {
         try {
+            $currentDateTime = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
+
             $esp = Esp::create([
                 'final_ph' => $request->final_ph,
                 'final_ker' => $request->final_ker,
