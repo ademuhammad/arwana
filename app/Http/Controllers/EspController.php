@@ -24,6 +24,7 @@ class EspController extends Controller
             ]);
 
             $pompa = Pompa::first();
+
             $data = $pompa->pompafilter . ',' . $pompa->pompaisi . ',' . $pompa->pompabuang;
 
             Event::dispatch(new NewEspEvent($esp));
