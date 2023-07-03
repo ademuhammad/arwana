@@ -23,12 +23,13 @@ class EspController extends Controller
                 'kualitasair' => $request->kualitasair,
             ]);
 
-            $pompa = Pompa::first()->only('pompafilter', 'pompaisi', 'pompabuang');
+            $pompa = Pompa::first();
+            $data = $pompa->pompafilter . ',' . $pompa->pompaisi . ',' . $pompa->pompabuang;
 
             Event::dispatch(new NewEspEvent($esp));
 
             return response()->json(
-                $pompa
+                $data
             );
         } catch (\Exception $e) {
             return response()->json([
