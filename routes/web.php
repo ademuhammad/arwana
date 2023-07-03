@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EspController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\PompaController;
+
 
 
 /*
@@ -31,5 +33,4 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::post('/esp', [EspController::class, 'store'])->name('data.store');
-
-Route::post('/pompa/control', [PompaController::class, 'controlPompa'])->name('pompa.control');
+Route::post('/pompa/control', [EspController::class, 'pompacontrol'])->name('pompa.control');

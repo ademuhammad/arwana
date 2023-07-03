@@ -27,6 +27,8 @@ class EspController extends Controller
 
             $data = $pompa->pompafilter . ',' . $pompa->pompaisi . ',' . $pompa->pompabuang;
 
+
+
             Event::dispatch(new NewEspEvent($esp));
 
             return response()->json(
@@ -38,5 +40,17 @@ class EspController extends Controller
                 'message' => $e->getMessage(),
             ]);
         }
+    }
+
+    public function pompacontrol(Request $request)
+    {
+        $pompa = Pompa::first();
+        // Memperbarui nilai-nilai Pompa berdasarkan data permintaan (request)
+        $pompa->pompafilter = $request->has('pompa_1') && $request->pompa_1 == 'on' ? 'HIGH' : 'LOW';
+        $pompa->pompabuang = $request->has('pompa_2') && $request->pompa_2 == 'on' ? 'HIGH' : 'LOW';
+        $pompa->pompaisi = $request->has('pompa_3') && $request->pompa_3 == 'on' ? 'HIGH' : 'LOW';
+        $pompa->save();
+
+        return redirect()->route('kontrol');
     }
 }
