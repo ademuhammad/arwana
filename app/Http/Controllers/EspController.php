@@ -44,11 +44,17 @@ class EspController extends Controller
 
     public function pompacontrol(Request $request)
     {
+        // Mengambil data pompa dari permintaan POST
+        $pompa1 = $request->input('pompa_1');
+        $pompa2 = $request->input('pompa_2');
+        $pompa3 = $request->input('pompa_3');
+
         $pompa = Pompa::first();
-        // Memperbarui nilai-nilai Pompa berdasarkan data permintaan (request)
-        $pompa->pompafilter = $request->has('pompa_1') && $request->pompa_1 == 'on' ? 'HIGH' : 'LOW';
-        $pompa->pompabuang = $request->has('pompa_2') && $request->pompa_2 == 'on' ? 'HIGH' : 'LOW';
-        $pompa->pompaisi = $request->has('pompa_3') && $request->pompa_3 == 'on' ? 'HIGH' : 'LOW';
+
+        // Memperbarui nilai-nilai Pompa berdasarkan data permintaan
+        $pompa->pompafilter = $pompa1 == 'on' ? 'HIGH' : 'LOW';
+        $pompa->pompabuang = $pompa2 == 'on' ? 'HIGH' : 'LOW';
+        $pompa->pompaisi = $pompa3 == 'on' ? 'HIGH' : 'LOW';
         $pompa->save();
 
         return redirect()->route('kontrol');
