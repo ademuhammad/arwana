@@ -33,4 +33,4 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::post('/esp', [EspController::class, 'store'])->name('data.store');
-Route::post('/pompa/control', [EspController::class, 'pompacontrol'])->name('pompa.control');
+Route::post('/pompa/control', 'EspController@pompacontrol')->name('pompa.control');
