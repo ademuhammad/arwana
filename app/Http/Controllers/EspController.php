@@ -53,4 +53,16 @@ class EspController extends Controller
 
         return redirect()->route('kontrol');
     }
+    public function getPompaData(Request $request)
+    {
+        $pompa = Pompa::first();
+
+        $data = [
+            'pompafilter' => $pompa->pompafilter,
+            'pompaisi' => $pompa->pompaisi,
+            'pompabuang' => $pompa->pompabuang
+        ];
+
+        return response()->json($data);
+    }
 }
