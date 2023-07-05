@@ -7,7 +7,7 @@ use App\Models\Esp;
 use App\Events\NewEspEvent;
 use App\Models\Pompa;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Http;
+
 
 class EspController extends Controller
 {
@@ -51,32 +51,6 @@ class EspController extends Controller
         $pompa->pompaisi = $request->has('pompa_3') && $request->pompa_3 == 'on' ? 'HIGH' : 'LOW';
         $pompa->save();
 
-        // Kirim permintaan ke Arduino menggunakan metode HTTP POST
-        $response = Http::post('http://adevelop.my.id/api/esp', [
-            'relay1' => $pompa->pompafilter,
-            'relay2' => $pompa->pompabuang,
-            'relay3' => $pompa->pompaisi,
-        ]);
-
-        if ($response->successful()) {
-            // Berhasil mengirim permintaan ke Arduino
-            return redirect()->route('kontrol')->with('success', 'Relay berhasil dikontrol');
-        } else {
-            // Gagal mengirim permintaan ke Arduino
-            return redirect()->route('kontrol')->with('error', 'Gagal mengontrol relay');
-        }
-    }
-
-    public function getPompaData(Request $request)
-    {
-        $pompa = Pompa::first();
-
-        $data = [
-            'pompafilter' => $pompa->pompafilter,
-            'pompaisi' => $pompa->pompaisi,
-            'pompabuang' => $pompa->pompabuang
-        ];
-
-        return response()->json($data);
+        return redirect()->route('kontrol');
     }
 }
