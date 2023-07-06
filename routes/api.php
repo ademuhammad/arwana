@@ -22,4 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('/esp', [EspController::class, 'store'])->name('data.store');
-Route::post('/kontrol', [PompaController::class, 'controlPompa'])->name('kontrol.controlpompa');
+Route::post('/relay', [EspController::class, 'storeRelayControl'])->name('relay');
+Route::get('/relay', [EspController::class, 'getRelayData']);

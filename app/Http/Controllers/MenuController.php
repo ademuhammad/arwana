@@ -62,4 +62,25 @@ class MenuController extends Controller
 
         return view('dashboard', compact('data', 'currentDateTime'));
     }
+
+    public function pompa(Request $request)
+    {
+
+        $pompa = Pompa::latest()->first();
+        // Memperbarui nilai-nilai Pompa berdasarkan data permintaan (request)
+        if ($request->has('pompa_1')) {
+            $pompa->pompafilter = $request->pompa_1 ? 1 : 0;
+        }
+
+        if ($request->has('pompa_2')) {
+            $pompa->pompabuang = $request->pompa_2 ? 1 : 0;
+        }
+
+        if ($request->has('pompa_3')) {
+            $pompa->pompaisi = $request->pompa_3 ? 1 : 0;
+        }
+
+        $pompa->save();
+        return redirect()->route('kontrol');
+    }
 }

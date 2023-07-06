@@ -15,9 +15,9 @@ class CreatePompasTable extends Migration
     {
         Schema::create('pompas', function (Blueprint $table) {
             $table->id();
-            $table->string('pompafilter')->default('LOW');
-            $table->string('pompabuang')->default('LOW');
-            $table->string('pompaisi')->default('LOW');
+            $table->boolean('pompafilter');
+            $table->boolean('pompabuang');
+            $table->boolean('pompaisi');
             $table->timestamps();
         });
     }

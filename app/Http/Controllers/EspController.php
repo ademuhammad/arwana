@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Esp;
-use App\Events\NewEspEvent;
 use App\Models\Pompa;
+use App\Events\NewEspEvent;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Event;
 
 
@@ -22,17 +24,10 @@ class EspController extends Controller
                 'keadaanturbity' => $request->keadaanturbity,
                 'kualitasair' => $request->kualitasair,
             ]);
-
-            $pompa = Pompa::first();
-
-            $data = $pompa->pompafilter . ',' . $pompa->pompaisi . ',' . $pompa->pompabuang;
-
-
-
             Event::dispatch(new NewEspEvent($esp));
 
             return response()->json(
-                $data
+                $esp
             );
         } catch (\Exception $e) {
             return response()->json([
@@ -42,15 +37,52 @@ class EspController extends Controller
         }
     }
 
-    public function pompacontrol(Request $request)
+    public function storeRelayControl(Request $request)
     {
-        $pompa = Pompa::first();
-        // Memperbarui nilai-nilai Pompa berdasarkan data permintaan (request)
-        $pompa->pompafilter = $request->has('pompa_1') && $request->pompa_1 == 'on' ? 'HIGH' : 'LOW';
-        $pompa->pompabuang = $request->has('pompa_2') && $request->pompa_2 == 'on' ? 'HIGH' : 'LOW';
-        $pompa->pompaisi = $request->has('pompa_3') && $request->pompa_3 == 'on' ? 'HIGH' : 'LOW';
-        $pompa->save();
 
-        return redirect()->route('kontrol');
+        try {
+
+            $validatedData =  Pompa::create([
+                'pompafilter' => $request->pompafilter,
+                'pompabuang' => $request->pompabuang,
+                'pompaisi' => $request->pompaisi,
+
+            ]);
+
+
+            return response()->json(
+                $validatedData
+            );
+        } catch (\Exception $e) {
+            return response()->json([
+                'code' => 400,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+
+    public function getRelayData(Request $request)
+    {
+        try {
+            $pompa = Pompa::first();
+            // Memperbarui nilai-nilai Pompa berdasarkan data permintaan (request)
+            $pompa->pompafilter = $request->has('pompa_1') && $request->pompa_1 == true ? 0 : 1;
+            $pompa->pompabuang = $request->has('pompa_2') && $request->pompa_2 == true ? 0 : 1;
+            $pompa->pompaisi = $request->has('pompa_3') && $request->pompa_3 == true ? 0 : 1;
+            $pompa->save();
+            return response()->json([
+                $pompa
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'code' => 400,
+                'message' => $e->getMessage(),
+            ]);
+        }
+
+
+
+        // return redirect()->route('kontrol');
     }
 }
