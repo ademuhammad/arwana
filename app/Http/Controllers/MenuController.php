@@ -15,7 +15,7 @@ class MenuController extends Controller
         $currentDateTime = Carbon::now()->format('l/d-m-Y/H:i');
         date_default_timezone_set('Asia/Jakarta'); // Set zona waktu menjadi Asia/Jakarta
         $data = Esp::orderBy('created_at', 'desc')->paginate(10); // Mengambil 10 data per halaman dari tabel "esp"
-        $pompa = Pompa::first(); // Mengambil catatan pertama dari model Pompa
+        $pompa = Pompa::orderby('created_at', 'DESC')->first(); // Mengambil catatan pertama dari model Pompa
 
         return view('data', compact('data', 'pompa', 'currentDateTime'));
     }
@@ -25,7 +25,7 @@ class MenuController extends Controller
         $currentDateTime = Carbon::now()->format('l/d-m-Y/H:i');
         date_default_timezone_set('Asia/Jakarta'); // Set zona waktu menjadi Asia/Jakarta
         $data = Esp::orderBy('created_at', 'desc')->paginate(10); // Mengambil 10 data per halaman dari tabel "esp"
-        $pompa = Pompa::first(); // Mengambil catatan pertama dari model Pompa
+        $pompa = Pompa::orderby('created_at', 'DESC')->first(); // Mengambil catatan pertama dari model Pompa
 
         return view('Kontrol', compact('pompa', 'data', 'currentDateTime'));
     }
@@ -37,7 +37,7 @@ class MenuController extends Controller
         $currentDateTime = Carbon::now()->format('l/d-m-Y/H:i');
         date_default_timezone_set('Asia/Jakarta'); // Set zona waktu menjadi Asia/Jakarta
         $data = Esp::orderBy('created_at', 'desc')->paginate(10); // Mengambil 10 data per halaman dari tabel "esp"
-        $pompa = Pompa::first(); // Mengambil catatan pertama dari model Pompa
+        $pompa = Pompa::orderby('created_at', 'DESC')->first(); // Mengambil catatan pertama dari model Pompa
 
         return view('datadetail', compact('data', 'pompa', 'currentDateTime'));
     }
@@ -66,21 +66,19 @@ class MenuController extends Controller
     public function pompa(Request $request)
     {
 
-        $pompa = Pompa::latest()->first();
+        $pompa = Pompa::orderby('created_at', 'DESC')->first();
         // Memperbarui nilai-nilai Pompa berdasarkan data permintaan (request)
-        if ($request->has('pompa_1')) {
-            $pompa->pompafilter = $request->pompa_1 ? 1 : 0;
-        }
-
-        if ($request->has('pompa_2')) {
-            $pompa->pompabuang = $request->pompa_2 ? 1 : 0;
-        }
-
-        if ($request->has('pompa_3')) {
-            $pompa->pompaisi = $request->pompa_3 ? 1 : 0;
-        }
-
+        $pompa->pompafilter = $request->pompa_1 ?? $pompa->pompafilter;
+        $pompa->pompabuang = $request->pompa_2 ?? $pompa->pompabuang;
+        $pompa->pompaisi = $request->pompa_3 ?? $pompa->pompaisi;
         $pompa->save();
+
+        // $pompa->pompafilter = $request->has('pompa_1') && $request->pompa_1 == true ? 1 : 0;
+        // $pompa->pompabuang = $request->has('pompa_2') && $request->pompa_2 == true ? 1 : 0;
+        // $pompa->pompaisi = $request->has('pompa_3') && $request->pompa_3 == true ? 1 : 0;
+        // $pompa->save();
+
+        // dd($request->pompa_1);
         return redirect()->route('kontrol');
     }
 }
