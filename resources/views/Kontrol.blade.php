@@ -134,6 +134,52 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Tanggal/Hari/Jam</th>
+                                <th>Pompa Filter</th>
+                                <th>Pompa Buang</th>
+                                <th>Pompa Isi</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+
+                            @foreach ($pompa as $pomp)
+                            <tr>
+                                <td>{{ $pompa->created_at ? $pompa->created_at->format('l/d-m-Y/H:i') : '' }}</td>
+                                <td>{{ $pompa->pompafilter }}</td>
+                                <td>{{ $pompa->pompaisi }}</td>
+                                <td>{{ $pompa->pompabuang }}</td>
+
+                            </tr>
+                            @endforeach
+
+                        </tbody>
+
+                    </table>
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            <li class="page-item {{ $data->previousPageUrl() ? '' : 'disabled' }}">
+                                <a class="page-link" href="{{ $data->previousPageUrl() }}">Previous</a>
+                            </li>
+                            @foreach ($data->getUrlRange(1, $data->lastPage()) as $page => $url)
+                            <li class="page-item {{ $page == $data->currentPage() ? 'active' : '' }}">
+                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                            </li>
+                            @endforeach
+                            <li class="page-item {{ $data->nextPageUrl() ? '' : 'disabled' }}">
+                                <a class="page-link" href="{{ $data->nextPageUrl() }}">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
             </div>
         </div>
     </section>

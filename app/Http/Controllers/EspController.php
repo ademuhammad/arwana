@@ -65,11 +65,11 @@ class EspController extends Controller
     public function getRelayData(Request $request)
     {
         try {
-            $pompa = Pompa::first();
+            $pompa = Pompa::orderby('created_at', 'DESC')->first();
             // Memperbarui nilai-nilai Pompa berdasarkan data permintaan (request)
-            $pompa->pompafilter = $request->has('pompa_1') && $request->pompa_1 == true ? 0 : 1;
-            $pompa->pompabuang = $request->has('pompa_2') && $request->pompa_2 == true ? 0 : 1;
-            $pompa->pompaisi = $request->has('pompa_3') && $request->pompa_3 == true ? 0 : 1;
+            $pompa->pompafilter = $request->pompa_1 ?? $pompa->pompafilter;
+            $pompa->pompabuang = $request->pompa_2 ?? $pompa->pompabuang;
+            $pompa->pompaisi = $request->pompa_3 ?? $pompa->pompaisi;
             $pompa->save();
             return response()->json([
                 $pompa

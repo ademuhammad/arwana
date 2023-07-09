@@ -22,9 +22,11 @@
                                             <th>Kualitas Air( Fuzzy Angka)</th>
                                             <th>Kekeruhan Air(Bahasa)</th>
                                             <th>pH Air(Bahasa)</th>
-                                            <th>Pompa 1 (Filter)</th>
+                                            <th>Kualitas Air(Bahasa)</th>
+
+                                            <!-- <th>Pompa 1 (Filter)</th>
                                             <th>Pompa 2 (Keluar)</th>
-                                            <th>Pompa 3 (Masuk)</th>
+                                            <th>Pompa 3 (Masuk)</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -37,9 +39,10 @@
                                             <td>{{ $item->fuzzy }}</td>
                                             <td>{{ $item->keadaanturbity }}</td>
                                             <td>{{ $item->keadaanph }}</td>
-                                            <td>{{ $item->pompa1 }}</td>
+                                            <td>{{ $item->kualitasair }}</td>
+                                            <!-- <td>{{ $item->pompa1 }}</td>
                                             <td>{{ $item->pompa2 }}</td>
-                                            <td>{{ $item->pompa3 }}</td>
+                                            <td>{{ $item->pompa3 }}</td> -->
                                         </tr>
                                         @endforeach
                                     </tbody>
