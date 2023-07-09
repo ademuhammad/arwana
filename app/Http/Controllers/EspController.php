@@ -64,25 +64,16 @@ class EspController extends Controller
 
     public function getRelayData(Request $request)
     {
-        try {
-            $pompa = Pompa::orderby('created_at', 'DESC')->first();
-            // Memperbarui nilai-nilai Pompa berdasarkan data permintaan (request)
-            $pompa->pompafilter = $request->pompa_1 ?? $pompa->pompafilter;
-            $pompa->pompabuang = $request->pompa_2 ?? $pompa->pompabuang;
-            $pompa->pompaisi = $request->pompa_3 ?? $pompa->pompaisi;
-            $pompa->save();
-            return response()->json([
-                $pompa
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'code' => 400,
-                'message' => $e->getMessage(),
-            ]);
-        }
+
+        $pompa = Pompa::orderby('created_at', 'DESC')->first();
+        // Memperbarui nilai-nilai Pompa berdasarkan data permintaan (request)
+        $pompa->pompafilter = $request->pompa_1 ?? $pompa->pompafilter;
+        $pompa->pompabuang = $request->pompa_2 ?? $pompa->pompabuang;
+        $pompa->pompaisi = $request->pompa_3 ?? $pompa->pompaisi;
+        $pompa->save();
 
 
 
-        // return redirect()->route('kontrol');
+        return redirect()->route('kontrol');
     }
 }

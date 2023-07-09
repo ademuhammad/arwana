@@ -66,12 +66,12 @@ class MenuController extends Controller
     public function pompa(Request $request)
     {
 
-        $pompa = Pompa::orderby('created_at', 'DESC')->first();
-        // Memperbarui nilai-nilai Pompa berdasarkan data permintaan (request)
-        $pompa->pompafilter = $request->pompa_1 ?? $pompa->pompafilter;
-        $pompa->pompabuang = $request->pompa_2 ?? $pompa->pompabuang;
-        $pompa->pompaisi = $request->pompa_3 ?? $pompa->pompaisi;
-        $pompa->save();
+        // $pompa = Pompa::orderby('created_at', 'DESC')->first();
+        // // Memperbarui nilai-nilai Pompa berdasarkan data permintaan (request)
+        // $pompa->pompafilter = $request->pompa_1 ?? $pompa->pompafilter;
+        // $pompa->pompabuang = $request->pompa_2 ?? $pompa->pompabuang;
+        // $pompa->pompaisi = $request->pompa_3 ?? $pompa->pompaisi;
+        // $pompa->save();
 
         // $pompa->pompafilter = $request->has('pompa_1') && $request->pompa_1 == true ? 1 : 0;
         // $pompa->pompabuang = $request->has('pompa_2') && $request->pompa_2 == true ? 1 : 0;
@@ -79,6 +79,6 @@ class MenuController extends Controller
         // $pompa->save();
 
         // dd($request->pompa_1);
-        return redirect()->route('kontrol');
+        return view('Kontrol', compact('pompa', 'currentDateTime'));
     }
 }
