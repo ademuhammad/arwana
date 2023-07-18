@@ -154,8 +154,9 @@
                             <tr>
                                 <td>{{ $pompa->created_at ? $pompa->created_at->format('l/d-m-Y/H:i') : '' }}</td>
                                 <td>{{ $pompa->pompafilter }}</td>
-                                <td>{{ $pompa->pompaisi }}</td>
                                 <td>{{ $pompa->pompabuang }}</td>
+                                <td>{{ $pompa->pompaisi }}</td>
+
 
                             </tr>
                             @endforeach
