@@ -16,7 +16,7 @@ class ControlModeController extends Controller
 
         // Pastikan data status ada dan nilainya adalah 'manual' atau 'otomatis'
         if ($status && in_array($status->status, ['manual', 'otomatis'])) {
-            return response()->json(['status' => 'success', 'data' => $status]);
+            return response()->json(['status' => 'success', 'data' => ['status' => $status->status]]);
         } else {
             return response()->json(['status' => 'error', 'message' => 'Data status tidak valid.']);
         }
