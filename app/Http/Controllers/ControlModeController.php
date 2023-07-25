@@ -4,16 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Status;
+use Illuminate\Support\Facades\DB;
 
 class ControlModeController extends Controller
 {
 
     public function getStatus(Request $request)
     {
-        $status = Status::latest()->value('status'); // Ambil data status terbaru dari database
+        // Ambil data status terbaru dari database
+        $status = DB::table('status')->latest()->first();
 
         // Pastikan data status ada dan nilainya adalah 'manual' atau 'otomatis'
-        if ($status === 'manual' || $status === 'otomatis') {
+        if ($status && in_array($status->status, ['manual', 'otomatis'])) {
             return response()->json(['status' => 'success', 'data' => $status]);
         } else {
             return response()->json(['status' => 'error', 'message' => 'Data status tidak valid.']);
