@@ -12,12 +12,16 @@
                                 <h4>Mode saat ini: {{ $controlMode->status }}</h4>
                             </div>
                             <div class="col-md-6 text-right">
-                                <form action="{{ route('control.setManualMode') }}" method="POST" class="d-inline">
+                                <form action="{{ route('control.setMode') }}" method="POST" class="d-inline">
                                     @csrf
+                                    <input type="hidden" name="status_mode" value="manual">
                                     <button type="submit" class="btn btn-primary">Switch to Manual Mode</button>
                                 </form>
-                                <form action="{{ route('control.setAutomaticMode') }}" method="POST" class="d-inline">
+
+                                <!-- Switch to Automatic Mode Form -->
+                                <form action="{{ route('control.setMode') }}" method="POST" class="d-inline">
                                     @csrf
+                                    <input type="hidden" name="status_mode" value="otomatis">
                                     <button type="submit" class="btn btn-success">Switch to Automatic Mode</button>
                                 </form>
                             </div>

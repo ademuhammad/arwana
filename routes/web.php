@@ -44,8 +44,8 @@ Route::get('api/get-status/pompa3/last', [EspController::class, 'getPompa3']);
 // Menampilkan halaman kontrol
 Route::get('/status', [MenuController::class, 'status'])->name('status');
 
-// Mengatur mode manual
-Route::post('/status/manual', [ControlModeController::class, 'setManualMode'])->name('control.setManualMode');
+// routes/web.php
+// routes/web.php
 
-// Mengatur mode otomatis
-Route::post('/status/automatic', [ControlModeController::class, 'setAutomaticMode'])->name('control.setAutomaticMode');
+Route::get('/status-mode', [ControlModeController::class, 'getStatus']);
+Route::post('/control/set-mode', [ControlModeController::class, 'setMode'])->name('control.setMode');

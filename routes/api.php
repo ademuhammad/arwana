@@ -24,5 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/esp', [EspController::class, 'store'])->name('data.store');
 Route::post('/relay', [EspController::class, 'storeRelayControl'])->name('relay');
 Route::get('/relay', [EspController::class, 'getRelayData']);
+
 // routes/api.php
-Route::post('/set-mode', 'App\Http\Controllers\ControlModeController@setMode');
+Route::get('/get-status', 'App\Http\Controllers\ControlModeController@getStatus')->name('control.getStatus');
