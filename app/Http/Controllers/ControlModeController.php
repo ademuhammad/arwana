@@ -8,20 +8,21 @@ use App\Models\Status;
 class ControlModeController extends Controller
 {
 
-
-    public function setManualMode(Request $request)
+    public function setMode(Request $request)
     {
-        // Perbarui mode kontrol menjadi 'manual' di database
-        Status::create(['status' => 'manual']);
+        // Ambil nilai status_mode dari permintaan POST
+        $statusMode = $request->input('status_mode');
 
-        return redirect()->route('status')->with('success', 'Berhasil beralih ke mode kontrol manual.');
-    }
+        // Pastikan nilai status_mode adalah 'manual' atau 'otomatis' sebelum memperbarui database
+        if ($statusMode === 'manual' || $statusMode === 'otomatis') {
+            // Perbarui mode kontrol di database
+            Status::create(['status' => $statusMode]);
 
-    public function setAutomaticMode(Request $request)
-    {
-        // Perbarui mode kontrol menjadi 'otomatis' di database
-        Status::create(['status' => 'otomatis']);
+            // Kembalikan respons berhasil
+            return response()->json(['status' => 'success', 'message' => "Berhasil beralih ke mode kontrol $statusMode."]);
+        }
 
-        return redirect()->route('status')->with('success', 'Berhasil beralih ke mode kontrol otomatis.');
+        // Jika nilai status_mode tidak valid, kembalikan respons gagal
+        return response()->json(['status' => 'error', 'message' => 'Mode tidak valid.']);
     }
 }
