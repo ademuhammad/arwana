@@ -76,4 +76,22 @@ class EspController extends Controller
 
         return redirect()->route('kontrol');
     }
+
+    public function getPompa1()
+    {
+        $data = Pompa::latest()->first()->pompafilter;
+        return $data;
+    }
+    
+    public function getPompa2()
+    {
+        $data = Pompa::latest()->first()->pompabuang;
+        return $data;
+    }
+
+    public function getPompa3()
+    {
+        $data = Pompa::latest()->first()->pompaisi;
+        return $data;
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Esp;
 use App\Models\Pompa;
+use App\Models\Status;
 use Illuminate\Support\Carbon;
 
 class MenuController extends Controller
@@ -16,8 +17,17 @@ class MenuController extends Controller
         date_default_timezone_set('Asia/Jakarta'); // Set zona waktu menjadi Asia/Jakarta
         $data = Esp::orderBy('created_at', 'desc')->paginate(10); // Mengambil 10 data per halaman dari tabel "esp"
         $pompa = Pompa::orderby('created_at', 'DESC')->first(); // Mengambil catatan pertama dari model Pompa
+        $labels = $data->pluck('created_at')->map(function ($date) {
+            // Tambahkan kondisi untuk memeriksa jika $date tidak null
+            return $date ? $date->format('H:i') : ''; // Ubah format tanggal menjadi hanya jam:menit atau kosong jika null
+        });
 
-        return view('data', compact('data', 'pompa', 'currentDateTime'));
+        // Ambil data final_ph dan final_ker dari masing-masing record pada tabel Esp
+        $finalPhData = $data->pluck('final_ph');
+        $finalKerData = $data->pluck('final_ker');
+
+        // Mengirim data yang sudah diolah ke tampilan datadetail
+        return view('data', compact('data', 'labels', 'finalPhData', 'finalKerData'));
     }
 
     public function kontrol()
@@ -26,8 +36,17 @@ class MenuController extends Controller
         date_default_timezone_set('Asia/Jakarta'); // Set zona waktu menjadi Asia/Jakarta
         $data = Esp::orderBy('created_at', 'desc')->paginate(10); // Mengambil 10 data per halaman dari tabel "esp"
         $pompa = Pompa::orderby('created_at', 'DESC')->first(); // Mengambil catatan pertama dari model Pompa
+        $labels = $data->pluck('created_at')->map(function ($date) {
+            // Tambahkan kondisi untuk memeriksa jika $date tidak null
+            return $date ? $date->format('H:i') : ''; // Ubah format tanggal menjadi hanya jam:menit atau kosong jika null
+        });
 
-        return view('Kontrol', compact('pompa', 'data', 'currentDateTime'));
+        // Ambil data final_ph dan final_ker dari masing-masing record pada tabel Esp
+        $finalPhData = $data->pluck('final_ph');
+        $finalKerData = $data->pluck('final_ker');
+
+        // Mengirim data yang sudah diolah ke tampilan datadetail
+        return view('Kontrol', compact('data', 'labels', 'finalPhData', 'finalKerData', 'pompa'));
     }
 
 
@@ -39,28 +58,58 @@ class MenuController extends Controller
         $data = Esp::orderBy('created_at', 'desc')->paginate(10); // Mengambil 10 data per halaman dari tabel "esp"
         $pompa = Pompa::orderby('created_at', 'DESC')->first(); // Mengambil catatan pertama dari model Pompa
 
-        return view('datadetail', compact('data', 'pompa', 'currentDateTime'));
+        $labels = $data->pluck('created_at')->map(function ($date) {
+            // Tambahkan kondisi untuk memeriksa jika $date tidak null
+            return $date ? $date->format('H:i') : ''; // Ubah format tanggal menjadi hanya jam:menit atau kosong jika null
+        });
+
+        // Ambil data final_ph dan final_ker dari masing-masing record pada tabel Esp
+        $finalPhData = $data->pluck('final_ph');
+        $finalKerData = $data->pluck('final_ker');
+
+        // Mengirim data yang sudah diolah ke tampilan datadetail
+        return view('datadetail', compact('data', 'labels', 'finalPhData', 'finalKerData'));
     }
 
 
     public function dashboard()
     {
-        $currentDateTime = Carbon::now()->format('l/d-m-Y/H:i');
-        date_default_timezone_set('Asia/Jakarta'); // Set zona waktu menjadi Asia/Jakarta
-        $data = Esp::orderBy('created_at', 'desc')->paginate(10); // Mengambil 10 data per halaman dari tabel "esp"
+        // Ambil data dari tabel Esp dengan mengurutkan berdasarkan tanggal terbaru dan ambil 10 data per halaman
+        $data = Esp::orderBy('created_at', 'desc')->paginate(10);
 
+        // Ubah format data dari tabel Esp menjadi sesuai dengan format yang dibutuhkan oleh Chart.js
+        $labels = $data->pluck('created_at')->map(function ($date) {
+            // Tambahkan kondisi untuk memeriksa jika $date tidak null
+            return $date ? $date->format('H:i') : ''; // Ubah format tanggal menjadi hanya jam:menit atau kosong jika null
+        });
 
-        return view('dashboard', compact('data', 'currentDateTime'));
+        // Ambil data final_ph dan final_ker dari masing-masing record pada tabel Esp
+        $finalPhData = $data->pluck('final_ph');
+        $finalKerData = $data->pluck('final_ker');
+
+        // Mengirim data yang sudah diolah ke tampilan dashboard
+        return view('dashboard', compact('data', 'labels', 'finalPhData', 'finalKerData'));
     }
+
+
 
     public function home()
     {
-        $currentDateTime = Carbon::now()->format('l/d-m-Y/H:i');
-        date_default_timezone_set('Asia/Jakarta'); // Set zona waktu menjadi Asia/Jakarta
-        $data = Esp::orderBy('created_at', 'desc')->paginate(10); // Mengambil 10 data per halaman dari tabel "esp"
+        // Ambil data dari tabel Esp dengan mengurutkan berdasarkan tanggal terbaru dan ambil 10 data per halaman
+        $data = Esp::orderBy('created_at', 'desc')->paginate(10);
 
+        // Ubah format data dari tabel Esp menjadi sesuai dengan format yang dibutuhkan oleh Chart.js
+        $labels = $data->pluck('created_at')->map(function ($date) {
+            // Tambahkan kondisi untuk memeriksa jika $date tidak null
+            return $date ? $date->format('H:i') : ''; // Ubah format tanggal menjadi hanya jam:menit atau kosong jika null
+        });
 
-        return view('dashboard', compact('data', 'currentDateTime'));
+        // Ambil data final_ph dan final_ker dari masing-masing record pada tabel Esp
+        $finalPhData = $data->pluck('final_ph');
+        $finalKerData = $data->pluck('final_ker');
+
+        // Mengirim data yang sudah diolah ke tampilan dashboard
+        return view('dashboard', compact('data', 'labels', 'finalPhData', 'finalKerData'));
     }
 
     public function pompa(Request $request)
@@ -80,5 +129,25 @@ class MenuController extends Controller
 
         // dd($request->pompa_1);
         return view('Kontrol', compact('pompa', 'currentDateTime'));
+    }
+
+    public function status()
+    {
+        // Ambil data control mode terbaru dari database
+        $controlMode = Status::latest()->first();
+        $data = Esp::orderBy('created_at', 'desc')->paginate(10);
+        // Ambil data control mode terbaru dari database
+        $controlMode = Status::latest()->first();
+        $labels = $data->pluck('created_at')->map(function ($date) {
+            // Tambahkan kondisi untuk memeriksa jika $date tidak null
+            return $date ? $date->format('H:i') : ''; // Ubah format tanggal menjadi hanya jam:menit atau kosong jika null
+        });
+
+        // Ambil data final_ph dan final_ker dari masing-masing record pada tabel Esp
+        $finalPhData = $data->pluck('final_ph');
+        $finalKerData = $data->pluck('final_ker');
+
+        // Mengirim data yang sudah diolah ke tampilan dashboard
+        return view('status', compact('data', 'labels', 'finalPhData', 'finalKerData', 'controlMode'));
     }
 }

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EspController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PompaController;
+use App\Http\Controllers\ControlModeController;
 
 
 
@@ -35,3 +36,16 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::post('/kontrol', [EspController::class, 'store'])->name('data.store');
 Route::post('/pompa/control', [MenuController::class, 'pompa'])->name('pompa.control');
+
+Route::get('api/get-status/pompa1/last', [EspController::class, 'getPompa1']);
+Route::get('api/get-status/pompa2/last', [EspController::class, 'getPompa2']);
+Route::get('api/get-status/pompa3/last', [EspController::class, 'getPompa3']);
+
+// Menampilkan halaman kontrol
+Route::get('/status', [MenuController::class, 'status'])->name('status');
+
+// Mengatur mode manual
+Route::post('/status/manual', [ControlModeController::class, 'setManualMode'])->name('control.setManualMode');
+
+// Mengatur mode otomatis
+Route::post('/status/automatic', [ControlModeController::class, 'setAutomaticMode'])->name('control.setAutomaticMode');
