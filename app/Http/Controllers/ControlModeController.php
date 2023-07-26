@@ -50,9 +50,11 @@ class ControlModeController extends Controller
 
         // Pastikan data pompa ada
         if ($pompa) {
+            $status = DB::table('status')->latest()->first();
             // Kirim data pompa ke Arduino dalam format JSON dengan HTTP status code 200 (OK)
             return response()->json([
                 'status' => 'success',
+                'mode' => $status->status,
                 'data' => [
                     'pompafilter' => $pompa->pompafilter,
                     'pompabuang' => $pompa->pompabuang,
