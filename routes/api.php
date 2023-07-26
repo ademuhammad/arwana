@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EspController;
 use App\Http\Controllers\PompaController;
 
+use App\Http\Controllers\ControlModeController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,3 +28,5 @@ Route::get('/relay', [EspController::class, 'getRelayData']);
 
 // routes/api.php
 Route::get('/status-mode', 'App\Http\Controllers\ControlModeController@getStatus')->name('control.getStatus');
+
+Route::get('/get-pompa-data', [ControlModeController::class, 'getPompaData'])->name('api.get.pompa.data');

@@ -35,7 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::post('/kontrol', [EspController::class, 'store'])->name('data.store');
-Route::post('/pompa/control', [MenuController::class, 'pompa'])->name('pompa.control');
+Route::post('/kontrol', [MenuController::class, 'pompa'])->name('pompa.control');
 
 Route::get('api/get-status/pompa1/last', [EspController::class, 'getPompa1']);
 Route::get('api/get-status/pompa2/last', [EspController::class, 'getPompa2']);
@@ -45,7 +45,9 @@ Route::get('api/get-status/pompa3/last', [EspController::class, 'getPompa3']);
 Route::get('/status', [MenuController::class, 'status'])->name('status');
 
 // routes/web.php
-// routes/web.php
 
 Route::get('/status-mode', [ControlModeController::class, 'getStatus']);
 Route::post('/control/set-mode', [ControlModeController::class, 'setMode'])->name('control.setMode');
+
+
+Route::get('/get-pompa-data', [ControlModeController::class, 'getPompaData'])->name('get.pompa.data');

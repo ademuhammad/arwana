@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Status;
 use Illuminate\Support\Facades\DB;
+use App\Models\Pompa;
+
 
 class ControlModeController extends Controller
 {
@@ -39,5 +41,27 @@ class ControlModeController extends Controller
 
         // Jika nilai status_mode tidak valid, kembalikan respons gagal
         return redirect()->route('status')->with('error', 'Mode tidak valid.');
+    }
+
+    public function getPompaData(Request $request)
+    {
+        // Ambil data pompa terbaru dari database
+        $pompa = Pompa::orderBy('created_at', 'desc')->first();
+
+        // Pastikan data pompa ada
+        if ($pompa) {
+            // Kirim data pompa ke Arduino dalam format JSON dengan HTTP status code 200 (OK)
+            return response()->json([
+                'status' => 'success',
+                'data' => [
+                    'pompafilter' => $pompa->pompafilter,
+                    'pompabuang' => $pompa->pompabuang,
+                    'pompaisi' => $pompa->pompaisi,
+                ],
+            ], 200);
+        } else {
+            // Kirim pesan error ke Arduino jika data pompa tidak ditemukan dengan HTTP status code 404 (Not Found)
+            return response()->json(['status' => 'error', 'message' => 'Data pompa tidak ditemukan.'], 404);
+        }
     }
 }

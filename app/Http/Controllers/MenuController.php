@@ -114,13 +114,23 @@ class MenuController extends Controller
 
     public function pompa(Request $request)
     {
+        $currentDateTime = Carbon::now()->format('l/d-m-Y/H:i');
+        $pompa = Pompa::orderby('created_at', 'DESC')->first();
+        $data = Esp::orderBy('created_at', 'desc')->paginate(10);
+        $labels = $data->pluck('created_at')->map(function ($date) {
+            // Tambahkan kondisi untuk memeriksa jika $date tidak null
+            return $date ? $date->format('H:i') : ''; // Ubah format tanggal menjadi hanya jam:menit atau kosong jika null
+        });
 
-        // $pompa = Pompa::orderby('created_at', 'DESC')->first();
-        // // Memperbarui nilai-nilai Pompa berdasarkan data permintaan (request)
-        // $pompa->pompafilter = $request->pompa_1 ?? $pompa->pompafilter;
-        // $pompa->pompabuang = $request->pompa_2 ?? $pompa->pompabuang;
-        // $pompa->pompaisi = $request->pompa_3 ?? $pompa->pompaisi;
-        // $pompa->save();
+        // Ambil data final_ph dan final_ker dari masing-masing record pada tabel Esp
+        $finalPhData = $data->pluck('final_ph');
+        $finalKerData = $data->pluck('final_ker');
+
+        // Memperbarui nilai-nilai Pompa berdasarkan data permintaan (request)
+        $pompa->pompafilter = $request->pompa_1 ?? $pompa->pompafilter;
+        $pompa->pompabuang = $request->pompa_2 ?? $pompa->pompabuang;
+        $pompa->pompaisi = $request->pompa_3 ?? $pompa->pompaisi;
+        $pompa->save();
 
         // $pompa->pompafilter = $request->has('pompa_1') && $request->pompa_1 == true ? 1 : 0;
         // $pompa->pompabuang = $request->has('pompa_2') && $request->pompa_2 == true ? 1 : 0;
@@ -128,7 +138,7 @@ class MenuController extends Controller
         // $pompa->save();
 
         // dd($request->pompa_1);
-        return view('Kontrol', compact('pompa', 'currentDateTime'));
+        return view('Kontrol', compact('pompa','data', 'labels', 'finalPhData', 'finalKerData'));
     }
 
     public function status()
