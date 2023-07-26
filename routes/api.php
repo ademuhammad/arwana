@@ -26,4 +26,4 @@ Route::post('/relay', [EspController::class, 'storeRelayControl'])->name('relay'
 Route::get('/relay', [EspController::class, 'getRelayData']);
 
 // routes/api.php
-Route::get('/get-status', 'App\Http\Controllers\ControlModeController@getStatus')->name('control.getStatus');
+Route::get('/status-mode', 'App\Http\Controllers\ControlModeController@getStatus')->name('control.getStatus');

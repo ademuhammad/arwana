@@ -16,15 +16,16 @@ class ControlModeController extends Controller
 
         // Pastikan data status ada dan nilainya adalah 'manual' atau 'otomatis'
         if ($status && in_array($status->status, ['manual', 'otomatis'])) {
+            // Kirim data status ke Arduino dalam format JSON
             return response()->json(['status' => 'success', 'data' => ['status' => $status->status]]);
         } else {
+            // Kirim pesan error ke Arduino jika data status tidak valid
             return response()->json(['status' => 'error', 'message' => 'Data status tidak valid.']);
         }
     }
 
     public function setMode(Request $request)
     {
-        // Ambil nilai status_mode dari permintaan POST
         $statusMode = $request->input('status_mode');
 
         // Pastikan nilai status_mode adalah 'manual' atau 'otomatis' sebelum memperbarui database
@@ -33,10 +34,10 @@ class ControlModeController extends Controller
             Status::create(['status' => $statusMode]);
 
             // Kembalikan respons berhasil
-            return response()->json(['status' => 'success', 'message' => "Berhasil beralih ke mode kontrol $statusMode."]);
+            return redirect()->route('status')->with('success', "Berhasil beralih ke mode kontrol $statusMode.");;
         }
 
         // Jika nilai status_mode tidak valid, kembalikan respons gagal
-        return response()->json(['status' => 'error', 'message' => 'Mode tidak valid.']);
+        return redirect()->route('status')->with('error', 'Mode tidak valid.');
     }
 }
