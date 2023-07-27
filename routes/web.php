@@ -51,3 +51,7 @@ Route::post('/control/set-mode', [ControlModeController::class, 'setMode'])->nam
 
 
 Route::get('/get-pompa-data', [ControlModeController::class, 'getPompaData'])->name('get.pompa.data');
+
+
+
+Route::get('/esp-data', [EspController::class, 'getEspData']);

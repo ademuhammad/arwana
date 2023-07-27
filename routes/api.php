@@ -30,3 +30,7 @@ Route::get('/relay', [EspController::class, 'getRelayData']);
 Route::get('/status-mode', 'App\Http\Controllers\ControlModeController@getStatus')->name('control.getStatus');
 
 Route::get('/get-pompa-data', [ControlModeController::class, 'getPompaData'])->name('api.get.pompa.data');
+
+
+// routes/api.php
+Route::get('/esp-data', [EspController::class, 'getEspData']);

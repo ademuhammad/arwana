@@ -94,4 +94,29 @@ class EspController extends Controller
         $data = Pompa::latest()->first()->pompaisi;
         return $data;
     }
+
+        public function getEspData(Request $request)
+    {
+        // Ambil data esp terbaru dari database
+        $esp = Esp::orderBy('created_at', 'desc')->first();
+
+        // Pastikan data esp ada
+        if ($esp) {
+            // Kirim data esp ke Arduino dalam format JSON dengan HTTP status code 200 (OK)
+            return response()->json([
+                'status' => 'success',
+                'data' => [
+                    'final_ph' => $esp->final_ph,
+                    'final_ker' => $esp->final_ker,
+                    'fuzzy' => $esp->fuzzy,
+                    'keadaanph' => $esp->keadaanph,
+                    'keadaanturbity' => $esp->keadaanturbity,
+                    'kualitasair' => $esp->kualitasair,
+                ],
+            ], 200);
+        } else {
+            // Kirim pesan error ke Arduino jika data esp tidak ditemukan dengan HTTP status code 404 (Not Found)
+            return response()->json(['status' => 'error', 'message' => 'Data esp tidak ditemukan.'], 404);
+        }
+    }
 }
