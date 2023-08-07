@@ -34,7 +34,7 @@ class MenuController extends Controller
     {
         $currentDateTime = Carbon::now()->format('l/d-m-Y/H:i');
         date_default_timezone_set('Asia/Jakarta'); // Set zona waktu menjadi Asia/Jakarta
-        $data = Esp::orderBy('created_at', 'desc')->paginate(10); // Mengambil 10 data per halaman dari tabel "esp"
+        $data = Esp::orderBy('id', 'desc')->paginate(10);
         $pompa = Pompa::orderby('created_at', 'DESC')->first(); // Mengambil catatan pertama dari model Pompa
         $labels = $data->pluck('created_at')->map(function ($date) {
             // Tambahkan kondisi untuk memeriksa jika $date tidak null
