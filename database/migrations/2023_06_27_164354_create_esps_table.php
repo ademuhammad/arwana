@@ -15,9 +15,9 @@ class CreateEspsTable extends Migration
     {
         Schema::create('esps', function (Blueprint $table) {
             $table->id();
-            $table->integer('final_ph');
-            $table->integer('final_ker');
-            $table->integer('fuzzy');
+            $table->float('final_ph');
+            $table->float('final_ker');
+            $table->float('fuzzy');
             $table->string('keadaanph');
             $table->string('keadaanturbity');
             $table->string('kualitasair');
