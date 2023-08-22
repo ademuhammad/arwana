@@ -21,7 +21,8 @@ public function store(Request $request)
 
             $now = Carbon::now();
 
-              $esp = Esp::create([
+            if($now->diffInMinutes(Carbon::parse($last_esp->created_at)) >= 15){
+                $esp = Esp::create([
                     'final_ph' => $request->final_ph,
                     'final_ker' => $request->final_ker,
                     'fuzzy' => $request->fuzzy,
@@ -33,35 +34,21 @@ public function store(Request $request)
                 return response()->json(
                     $esp
                 );
-
-            // if($now->diffInMinutes(Carbon::parse($last_esp->created_at)) >= 15){
-            //     $esp = Esp::create([
-            //         'final_ph' => $request->final_ph,
-            //         'final_ker' => $request->final_ker,
-            //         'fuzzy' => $request->fuzzy,
-            //         'keadaanph' => $request->keadaanph,
-            //         'keadaanturbity' => $request->keadaanturbity,
-            //         'kualitasair' => $request->kualitasair,
-            //     ]);
-            //     Event::dispatch(new NewEspEvent($esp)); 
-            //     return response()->json(
-            //         $esp
-            //     );
-            // }
-            // if($last_esp->kualitasair != $request->kualitasair){
-            //     $esp = Esp::create([
-            //         'final_ph' => $request->final_ph,
-            //         'final_ker' => $request->final_ker,
-            //         'fuzzy' => $request->fuzzy,
-            //         'keadaanph' => $request->keadaanph,
-            //         'keadaanturbity' => $request->keadaanturbity,
-            //         'kualitasair' => $request->kualitasair,
-            //     ]);
-            //     Event::dispatch(new NewEspEvent($esp));
-            //     return response()->json(
-            //         $esp
-            //     );
-            // }
+            }
+            if($last_esp->kualitasair != $request->kualitasair){
+                $esp = Esp::create([
+                    'final_ph' => $request->final_ph,
+                    'final_ker' => $request->final_ker,
+                    'fuzzy' => $request->fuzzy,
+                    'keadaanph' => $request->keadaanph,
+                    'keadaanturbity' => $request->keadaanturbity,
+                    'kualitasair' => $request->kualitasair,
+                ]);
+                Event::dispatch(new NewEspEvent($esp));
+                return response()->json(
+                    $esp
+                );
+            }
             return response()->json('success');
 
         } catch (\Exception $e) {
