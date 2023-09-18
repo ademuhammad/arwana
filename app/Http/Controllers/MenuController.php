@@ -55,8 +55,8 @@ class MenuController extends Controller
     {
         $currentDateTime = Carbon::now()->format('l/d-m-Y/H:i');
         date_default_timezone_set('Asia/Jakarta'); // Set zona waktu menjadi Asia/Jakarta
-        $data = Esp::orderBy('created_at', 'desc')->paginate(10); // Mengambil 10 data per halaman dari tabel "esp"
-        $pompa = Pompa::orderby('created_at', 'DESC')->first(); // Mengambil catatan pertama dari model Pompa
+        $data = Esp::orderBy('id', 'desc')->paginate(10); // Mengambil 10 data per halaman dari tabel "esp" dan mengurutkannya berdasarkan ID secara descending
+        $pompa = Pompa::orderby('id', 'DESC')->first(); // Mengambil catatan pertama dari model Pompa
 
         $labels = $data->pluck('created_at')->map(function ($date) {
             // Tambahkan kondisi untuk memeriksa jika $date tidak null
@@ -159,5 +159,13 @@ class MenuController extends Controller
 
         // Mengirim data yang sudah diolah ke tampilan dashboard
         return view('status', compact('data', 'labels', 'finalPhData', 'finalKerData', 'controlMode'));
+    }
+
+    public function realtime() {
+
+        $real = Esp::all();
+        return response()->json(
+            $real
+        );
     }
 }

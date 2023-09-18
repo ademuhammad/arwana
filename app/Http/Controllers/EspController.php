@@ -87,7 +87,7 @@ public function store(Request $request)
     public function getRelayData(Request $request)
     {
 
-        $pompa = Pompa::orderby('created_at', 'DESC')->first();
+        $pompa = Pompa::orderby('id')->first();
         // Memperbarui nilai-nilai Pompa berdasarkan data permintaan (request)
         $pompa->pompafilter = $request->pompa_1 ?? $pompa->pompafilter;
         $pompa->pompabuang = $request->pompa_2 ?? $pompa->pompabuang;

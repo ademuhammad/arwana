@@ -36,8 +36,7 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
             </ul>
 
@@ -237,23 +236,23 @@
     <!-- <script src="{{ asset('AdminLTE/dist/js/demo.js') }}"></script> -->
     <!-- Page specific script -->
     <script>
-        $(function() {
-            $("#example1").DataTable({
-                // "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "excel", "pdf", "print", ]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+    $(function() {
+        $("#example1").DataTable({
+            // "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "excel", "pdf", "print", ]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
         });
+    });
     </script>
 
     <!-- button on of -->
@@ -288,101 +287,137 @@
     <script src="{{ asset('/AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
     <script>
-        $(function() {
-            // ...
-            // chart 1
-            // Get context with jQuery - using jQuery's .get() method.
-            var areaChartCanvas = $('#areaChart').get(0).getContext('2d');
+    $(function() {
+        // ...
+        // chart 1
+        // Get context with jQuery - using jQuery's .get() method.
+        var areaChartCanvas = $('#areaChart').get(0).getContext('2d');
 
-            var areaChartData = {
-                labels: {!! json_encode($labels) !!},
-                datasets: [{
-                    label: 'Final pH',
-                    backgroundColor: 'rgba(60,141,188,0.9)',
-                    borderColor: 'rgba(60,141,188,0.8)',
-                    pointRadius: false,
-                    pointColor: '#3b8bba',
-                    pointStrokeColor: 'rgba(60,141,188,1)',
-                    pointHighlightFill: '#fff',
-                    pointHighlightStroke: 'rgba(60,141,188,1)',
-                    data: {!! json_encode($finalPhData) !!}
-                }]
-            };
-
-            var areaChartOptions = {
-                maintainAspectRatio: false,
-                responsive: true,
-                legend: {
-                    display: false
-                },
-                scales: {
-                    xAxes: [{
-                        gridLines: {
-                            display: false,
-                        }
-                    }],
-                    yAxes: [{
-                        gridLines: {
-                            display: false,
-                        }
-                    }]
+        var areaChartData = {
+            labels: {
+                !!json_encode($labels) !!
+            },
+            datasets: [{
+                label: 'Final pH',
+                backgroundColor: 'rgba(60,141,188,0.9)',
+                borderColor: 'rgba(60,141,188,0.8)',
+                pointRadius: false,
+                pointColor: '#3b8bba',
+                pointStrokeColor: 'rgba(60,141,188,1)',
+                pointHighlightFill: '#fff',
+                pointHighlightStroke: 'rgba(60,141,188,1)',
+                data: {
+                    !!json_encode($finalPhData) !!
                 }
-            };
+            }]
+        };
 
-            // This will get the first returned node in the jQuery collection.
-            new Chart(areaChartCanvas, {
-                type: 'line',
-                data: areaChartData,
-                options: areaChartOptions
-            });
-
-            // chart 2
-            // Get context with jQuery - using jQuery's .get() method.
-            var areaChartCanvas2 = $('#areaChart2').get(0).getContext('2d');
-
-            var areaChartData2 = {
-                labels: {!! json_encode($labels) !!},
-                datasets: [{
-                    label: 'Final Kekeruhan Air',
-                    backgroundColor: 'rgba(60,141,188,0.9)',
-                    borderColor: 'rgba(60,141,188,0.8)',
-                    pointRadius: false,
-                    pointColor: '#3b8bba',
-                    pointStrokeColor: 'rgba(60,141,188,1)',
-                    pointHighlightFill: '#fff',
-                    pointHighlightStroke: 'rgba(60,141,188,1)',
-                    data: {!! json_encode($finalKerData) !!}
+        var areaChartOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+            legend: {
+                display: false
+            },
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        display: false,
+                    }
+                }],
+                yAxes: [{
+                    gridLines: {
+                        display: false,
+                    }
                 }]
-            };
-            var areaChartOptions2 = {
-                maintainAspectRatio: false,
-                responsive: true,
-                legend: {
-                    display: false
-                },
-                scales: {
-                    xAxes: [{
-                        gridLines: {
-                            display: false,
-                        }
-                    }],
-                    yAxes: [{
-                        gridLines: {
-                            display: false,
-                        }
-                    }]
-                }
-            };
+            }
+        };
 
-            // This will get the first returned node in the jQuery collection.
-            new Chart(areaChartCanvas2, {
-                type: 'line',
-                data: areaChartData2,
-                options: areaChartOptions2
-            });
-
+        // This will get the first returned node in the jQuery collection.
+        new Chart(areaChartCanvas, {
+            type: 'line',
+            data: areaChartData,
+            options: areaChartOptions
         });
+
+        // chart 2
+        // Get context with jQuery - using jQuery's .get() method.
+        var areaChartCanvas2 = $('#areaChart2').get(0).getContext('2d');
+
+        var areaChartData2 = {
+            labels: {
+                !!json_encode($labels) !!
+            },
+            datasets: [{
+                label: 'Final Kekeruhan Air',
+                backgroundColor: 'rgba(60,141,188,0.9)',
+                borderColor: 'rgba(60,141,188,0.8)',
+                pointRadius: false,
+                pointColor: '#3b8bba',
+                pointStrokeColor: 'rgba(60,141,188,1)',
+                pointHighlightFill: '#fff',
+                pointHighlightStroke: 'rgba(60,141,188,1)',
+                data: {
+                    !!json_encode($finalKerData) !!
+                }
+            }]
+        };
+        var areaChartOptions2 = {
+            maintainAspectRatio: false,
+            responsive: true,
+            legend: {
+                display: false
+            },
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        display: false,
+                    }
+                }],
+                yAxes: [{
+                    gridLines: {
+                        display: false,
+                    }
+                }]
+            }
+        };
+
+        // This will get the first returned node in the jQuery collection.
+        new Chart(areaChartCanvas2, {
+            type: 'line',
+            data: areaChartData2,
+            options: areaChartOptions2
+        });
+
+    });
     </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    function updateTable() {
+        // Fetch updated data for tabel
+        $.ajax({
+            url: '/realtime', // Ganti dengan URL endpoint untuk mendapatkan data terbaru
+            method: 'GET',
+            success: function(data) {
+                // Hapus semua baris yang ada di tabel (jika ada)
+                $('#example1 tbody').empty();
+
+                // Loop melalui setiap entri dalam data dan tambahkan ke tabel
+                $.each(data, function(index, row) {
+                    $('#example1 tbody').append('<tr><td>' + row.created_at + '</td><td>' + row
+                        .final_ker + '</td><td>' + row.final_ph + '</td><td>' + row.fuzzy +
+                        '</td><td>' + row.keadaanturbity + '</td><td>' + row.keadaanph +
+                        '</td><td>' + row.kualitasair + '</td></tr>');
+                });
+            }
+        });
+    }
+
+    // Panggil updateTable setiap 5 detik
+    setInterval(updateTable, 5000);
+    </script>
+
+
 </body>
 
 </html>

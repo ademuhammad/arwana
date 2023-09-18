@@ -55,3 +55,5 @@ Route::get('/get-pompa-data', [ControlModeController::class, 'getPompaData'])->n
 
 
 Route::get('/esp-data', [EspController::class, 'getEspData']);
+
+Route::get('/real', [MenuController::class, 'realtime']);
