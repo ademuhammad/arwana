@@ -21,7 +21,7 @@ public function store(Request $request)
 
             $now = Carbon::now();
 
-            if($now->diffInMinutes(Carbon::parse($last_esp->created_at)) >= 15){
+            if($now->diffInMinutes(Carbon::parse($last_esp->created_at)) >= 2){
                 $esp = Esp::create([
                     'final_ph' => $request->final_ph,
                     'final_ker' => $request->final_ker,

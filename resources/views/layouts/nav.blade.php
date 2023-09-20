@@ -392,30 +392,6 @@
     </script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-    function updateTable() {
-        // Fetch updated data for tabel
-        $.ajax({
-            url: '/realtime', // Ganti dengan URL endpoint untuk mendapatkan data terbaru
-            method: 'GET',
-            success: function(data) {
-                // Hapus semua baris yang ada di tabel (jika ada)
-                $('#example1 tbody').empty();
-
-                // Loop melalui setiap entri dalam data dan tambahkan ke tabel
-                $.each(data, function(index, row) {
-                    $('#example1 tbody').append('<tr><td>' + row.created_at + '</td><td>' + row
-                        .final_ker + '</td><td>' + row.final_ph + '</td><td>' + row.fuzzy +
-                        '</td><td>' + row.keadaanturbity + '</td><td>' + row.keadaanph +
-                        '</td><td>' + row.kualitasair + '</td></tr>');
-                });
-            }
-        });
-    }
-
-    // Panggil updateTable setiap 5 detik
-    setInterval(updateTable, 5000);
-    </script>
 
 
 </body>

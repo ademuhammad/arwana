@@ -4,7 +4,7 @@
 <div class="content-wrapper">
     <section class="content">
         <div class="container-fluid">
-            <div class="container" id="live">
+            <div class="container">
 
                 <div class="row">
                     <div class="col">
@@ -71,33 +71,5 @@
     </section>
 </div>
 
-
-<script type="text/javascript">
-$(document).ready(function() {
-    setInterval(function() {
-        $("#live").load("{{ url('real') }}");
-
-
-    }, 1000);
-});
-</script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script>
-function updateKapasitas() {
-    // Fetch updated data for kapasitas1
-    $.ajax({
-        url: '/real', // Ganti dengan URL endpoint untuk mendapatkan kapasitas terbaru
-        method: 'GET',
-        success: function(data) {
-
-            $('#live').text(data.#example1 + '');
-        }
-    });
-}
-
-// Panggil updateKapasitas setiap 5 detik
-setInterval(updateKapasitas, 5000);
-</script>
 
 @endsection
